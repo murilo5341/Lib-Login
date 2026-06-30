@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "login-ui": {
+      "projectType": "library",
+      "root": "projects/login-ui",
+      "sourceRoot": "projects/login-ui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/login-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/login-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/login-ui/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  }
+}

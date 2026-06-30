@@ -1,0 +1,49 @@
+<div class="login-page">    
+  <!-- Moon icon (dark mode toggle) -->
+  <button class="theme-toggle" (click)="toggleTheme()" aria-label="Alternar tema">
+
+    @if (!isDarkMode) {
+    <i class="fa-regular fa-moon"></i>
+    }
+
+    @if (isDarkMode) {
+    <i class="fa-regular fa-sun"></i>
+    }
+
+  </button>
+
+
+
+  <!-- Login card -->
+  <div class="login-card">
+      <!-- Elephant image -->
+    <div class="elephant-container">
+      <img src="assets/Cabelefant.avif" alt="Elephant Art" class="elephant-image" />
+    </div>
+
+    <!-- Subtitle -->
+    
+    <h1 class="login-title">LOGIN</h1>
+    <!-- <p class="subtitle">"Acesse sua conta para continuar"</p> -->
+    <form class="login-form" (ngSubmit)="onLogin()">
+      <div class="input-group">
+        <input type="text" id="usuario" placeholder="Usuário" [(ngModel)]="username" name="username" required />
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="senha" placeholder="Senha" [(ngModel)]="password" name="password" required />
+      </div>
+
+      <button type="submit" class="btn-entrar" id="btnEntrar">Entrar</button>
+    </form>
+    
+    <p class="password-recovery" (click)="forgotPassword.emit()">Esqueceu sua senha?</p>
+    <!-- <div class="linha"></div> -->
+     <p class="direitos-autorais">@Todos os direitos reservados a Tintas Marfim</p>
+  </div>
+
+  <!-- Fluid decoration bottom-left -->
+  <!-- <div class="fluid-decoration">
+    <img src="padraotm2.svg" alt="" class="fluid-image" />
+  </div> -->
+</div>
