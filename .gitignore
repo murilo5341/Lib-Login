@@ -46,3 +46,6 @@ Thumbs.db
 # npm auth (NUNCA commitar token). O token fica no ~/.npmrc da máquina.
 # O .npmrc da raiz só tem o mapeamento de escopo (sem segredo), então é versionado de propósito.
 .npmrc.local
+
+# Histórico local de sessão com possível informação sensível.
+sessaoclaude.md

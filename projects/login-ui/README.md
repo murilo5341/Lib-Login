@@ -1,10 +1,8 @@
-# @SEU_USUARIO/login-ui
+# @murilo5341/login-ui
 
 Biblioteca Angular com a tela de login padrão da Tintas Marfim. O mesmo layout é
 reutilizado em vários projetos; **cada projeto decide como autenticar**, reagindo ao
 evento `login` emitido pelo componente.
-
-> Substitua `SEU_USUARIO` pelo seu usuário do GitHub e `NOME_DO_REPO` pelo nome do repositório.
 
 ---
 
@@ -15,7 +13,7 @@ A lib é publicada no **GitHub Packages** (registry privado). Em cada projeto qu
 ### 1. Criar um `.npmrc` na raiz do projeto
 
 ```
-@SEU_USUARIO:registry=https://npm.pkg.github.com
+@murilo5341:registry=https://npm.pkg.github.com
 ```
 
 ### 2. Autenticar (uma vez por máquina)
@@ -32,7 +30,7 @@ O token é um Personal Access Token (classic) com escopo `read:packages` + `repo
 ### 3. Instalar
 
 ```bash
-npm install @SEU_USUARIO/login-ui
+npm install @murilo5341/login-ui
 ```
 
 ---
@@ -45,7 +43,7 @@ A imagem vem empacotada na lib. Copie-a no `angular.json` do projeto:
 
 ```json
 "assets": [
-  { "glob": "**/*", "input": "node_modules/@SEU_USUARIO/login-ui/assets", "output": "assets" }
+  { "glob": "**/*", "input": "node_modules/@murilo5341/login-ui/assets", "output": "assets" }
 ]
 ```
 
@@ -65,7 +63,7 @@ O `LoginPage` é um componente **standalone** — importe direto:
 
 ```ts
 import { Component } from '@angular/core';
-import { LoginPage, LoginCredentials } from '@SEU_USUARIO/login-ui';
+import { LoginPage, LoginCredentials } from '@murilo5341/login-ui';
 
 @Component({
   selector: 'app-minha-tela',

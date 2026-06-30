@@ -12,6 +12,6 @@ O app que consumir a biblioteca deve copiar esses assets no próprio `angular.js
 
 ```json
 "assets": [
-  { "glob": "**/*", "input": "node_modules/login-ui/assets", "output": "assets" }
+  { "glob": "**/*", "input": "node_modules/@murilo5341/login-ui/assets", "output": "assets" }
 ]
 ```

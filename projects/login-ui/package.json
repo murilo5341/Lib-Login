@@ -1,12 +1,12 @@
 {
-  "name": "@SEU_USUARIO/login-ui",
+  "name": "@murilo5341/login-ui",
   "version": "0.0.1",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SEU_USUARIO/NOME_DO_REPO.git"
+    "url": "git+https://github.com/murilo5341/Lib-Login.git"
   },
   "peerDependencies": {
     "@angular/common": "^21.2.0",
