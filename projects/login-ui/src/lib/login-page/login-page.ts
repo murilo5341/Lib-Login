@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 export interface LoginCredentials {
@@ -17,6 +17,9 @@ export interface LoginCredentials {
   },
 })
 export class LoginPage {
+  @Input() imageSrc = 'assets/Cabelefant.avif';
+  @Input() imageAlt = 'Elephant Art';
+
   @Output() login = new EventEmitter<LoginCredentials>();
   @Output() forgotPassword = new EventEmitter<void>();
 

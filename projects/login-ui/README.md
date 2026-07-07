@@ -37,14 +37,23 @@ npm install @murilo5341/login-ui
 
 ## Configuração no projeto consumidor
 
-### Imagem (asset do elefante)
+### Imagem/logo
 
-A imagem vem empacotada na lib. Copie-a no `angular.json` do projeto:
+Por padrão, o componente usa a imagem do elefante empacotada na lib. Copie-a no `angular.json` do projeto:
 
 ```json
 "assets": [
   { "glob": "**/*", "input": "node_modules/@murilo5341/login-ui/assets", "output": "assets" }
 ]
+```
+
+Para usar outra imagem, coloque o arquivo nos assets do projeto consumidor e informe o caminho no componente:
+
+```html
+<lib-login-page
+  imageSrc="assets/minha-logo.png"
+  imageAlt="Logo do sistema">
+</lib-login-page>
 ```
 
 ### Font Awesome (ícones de lua/sol do toggle de tema)
@@ -70,6 +79,8 @@ import { LoginPage, LoginCredentials } from '@murilo5341/login-ui';
   imports: [LoginPage],
   template: `
     <lib-login-page
+      imageSrc="assets/minha-logo.png"
+      imageAlt="Logo do sistema"
       (login)="entrar($event)"
       (forgotPassword)="recuperarSenha()">
     </lib-login-page>
@@ -89,6 +100,11 @@ export class MinhaTela {
 ```
 
 ### API do componente
+
+| Entrada (`@Input`) | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `imageSrc` | `string` | `assets/Cabelefant.avif` | Caminho da imagem/logo exibida acima do formulário. |
+| `imageAlt` | `string` | `Elephant Art` | Texto alternativo da imagem. |
 
 | Saída (`@Output`) | Tipo | Quando dispara |
 |---|---|---|
