@@ -1,59 +1,129 @@
-# LoginUi
+# @murilo5341/login-ui
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
+Biblioteca Angular com a tela de login padrão da Tintas Marfim. O mesmo layout é
+reutilizado em vários projetos; **cada projeto decide como autenticar**, reagindo ao
+evento `login` emitido pelo componente.
 
-## Development server
+---
 
-To start a local development server, run:
+## Instalação
 
-```bash
-ng serve
+A lib é publicada no **GitHub Packages** (registry privado). Em cada projeto que for usá-la:
+
+### 1. Criar um `.npmrc` na raiz do projeto
+
+```
+@murilo5341:registry=https://npm.pkg.github.com
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 2. Autenticar (uma vez por máquina)
 
-## Code scaffolding
+Adicione seu token do GitHub no `.npmrc` da **pasta do usuário** (`C:\Users\<voce>\.npmrc`).
+O token é um Personal Access Token (classic) com escopo `read:packages` + `repo`:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+//npm.pkg.github.com/:_authToken=SEU_TOKEN_AQUI
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+> Nunca commite o token. Ele fica só no `~/.npmrc` da sua máquina.
+
+### 3. Instalar
 
 ```bash
-ng generate --help
+npm install @murilo5341/login-ui
 ```
 
-## Building
+---
 
-To build the project run:
+## Configuração no projeto consumidor
+
+### Imagem/logo
+
+Por padrão, o componente usa a imagem do elefante empacotada na lib. Copie-a no `angular.json` do projeto:
+
+```json
+"assets": [
+  { "glob": "**/*", "input": "node_modules/@murilo5341/login-ui/assets", "output": "assets" }
+]
+```
+
+Para usar outra imagem, coloque o arquivo nos assets do projeto consumidor e informe o caminho no componente:
+
+```html
+<lib-login-page
+  imageSrc="assets/minha-logo.png"
+  imageAlt="Logo do sistema">
+</lib-login-page>
+```
+
+### Font Awesome (ícones de lua/sol do toggle de tema)
+
+Inclua no `index.html` do projeto:
+
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+```
+
+---
+
+## Uso
+
+O `LoginPage` é um componente **standalone** — importe direto:
+
+```ts
+import { Component } from '@angular/core';
+import { LoginPage, LoginCredentials } from '@murilo5341/login-ui';
+
+@Component({
+  selector: 'app-minha-tela',
+  imports: [LoginPage],
+  template: `
+    <lib-login-page
+      imageSrc="assets/minha-logo.png"
+      imageAlt="Logo do sistema"
+      (login)="entrar($event)"
+      (forgotPassword)="recuperarSenha()">
+    </lib-login-page>
+  `,
+})
+export class MinhaTela {
+  entrar(cred: LoginCredentials) {
+    // cada projeto faz a autenticação do seu jeito:
+    // chamar API, validar, navegar, etc.
+    console.log(cred.username, cred.password);
+  }
+
+  recuperarSenha() {
+    // navegar para recuperação de senha, abrir modal, etc.
+  }
+}
+```
+
+### API do componente
+
+| Entrada (`@Input`) | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `imageSrc` | `string` | `assets/Cabelefant.avif` | Caminho da imagem/logo exibida acima do formulário. |
+| `imageAlt` | `string` | `Elephant Art` | Texto alternativo da imagem. |
+
+| Saída (`@Output`) | Tipo | Quando dispara |
+|---|---|---|
+| `login` | `LoginCredentials` (`{ username, password }`) | Ao enviar o formulário (botão **Entrar**). |
+| `forgotPassword` | `void` | Ao clicar em **"Esqueceu sua senha?"**. |
+
+O toggle de tema (claro/escuro) é interno: adiciona/remove a classe `dark-theme` no `<body>`.
+
+---
+
+## Publicar uma nova versão (mantenedores)
 
 ```bash
-ng build
+# 1) suba a versão em projects/login-ui/package.json (ex.: 0.0.1 -> 0.0.2)
+# 2) build da lib
+ng build login-ui
+# 3) publique a partir do pacote compilado
+cd dist/login-ui
+npm publish
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para publicar, o token precisa do escopo `write:packages` (além de `repo`).
