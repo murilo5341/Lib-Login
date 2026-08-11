@@ -14,7 +14,7 @@ export interface LoginCredentials {
   styleUrl: './login-page.css',
 })
 export class LoginPage {
-  @Input() imageSrc = 'assets/Cabelefant.avif';
+  @Input() imageSrc = 'assets/ivory-icon.png';
   @Input() imageAlt = 'Ivory';
 
   @Output() login = new EventEmitter<LoginCredentials>();

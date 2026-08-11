@@ -39,7 +39,7 @@ npm install @murilo5341/login-ui
 
 ### Imagem/logo
 
-Por padrão, o componente usa a imagem do elefante empacotada na lib. Copie-a no `angular.json` do projeto:
+Por padrão, o componente usa a logo Ivory empacotada na lib. Copie-a no `angular.json` do projeto:
 
 ```json
 "assets": [
@@ -89,10 +89,10 @@ export class MinhaTela {
 
 ### API do componente
 
-| Entrada (`@Input`) | Tipo     | Padrão                   | Descrição                                           |
-| ------------------ | -------- | ------------------------ | --------------------------------------------------- |
-| `imageSrc`         | `string` | `assets/Cabelefant.avif` | Caminho da imagem/logo exibida acima do formulário. |
-| `imageAlt`         | `string` | `Ivory`                  | Texto alternativo da imagem.                        |
+| Entrada (`@Input`) | Tipo     | Padrão                  | Descrição                                           |
+| ------------------ | -------- | ----------------------- | --------------------------------------------------- |
+| `imageSrc`         | `string` | `assets/ivory-icon.png` | Caminho da imagem/logo exibida acima do formulário. |
+| `imageAlt`         | `string` | `Ivory`                 | Texto alternativo da imagem.                        |
 
 | Saída (`@Output`) | Tipo                                          | Quando dispara                             |
 | ----------------- | --------------------------------------------- | ------------------------------------------ |
