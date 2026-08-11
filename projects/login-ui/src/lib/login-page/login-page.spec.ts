@@ -20,25 +20,61 @@ describe('LoginPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toggle the dark theme class on the host element', () => {
+  it('should toggle password visibility', () => {
     const hostElement = fixture.nativeElement as HTMLElement;
 
     fixture.detectChanges();
-    const themeToggle = hostElement.querySelector<HTMLButtonElement>('.theme-toggle');
+    const passwordInput = hostElement.querySelector<HTMLInputElement>('input[name="password"]');
+    const toggleButton = hostElement.querySelector<HTMLButtonElement>('.toggle-senha');
 
-    expect(themeToggle).not.toBeNull();
-    expect(hostElement.classList.contains('dark-theme')).toBe(false);
+    expect(passwordInput).not.toBeNull();
+    expect(toggleButton).not.toBeNull();
+    expect(passwordInput!.type).toBe('password');
 
-    themeToggle!.click();
+    toggleButton!.click();
     fixture.detectChanges();
 
-    expect(component.isDarkMode).toBe(true);
-    expect(hostElement.classList.contains('dark-theme')).toBe(true);
+    expect(component.mostrarSenha).toBe(true);
+    expect(passwordInput!.type).toBe('text');
 
-    themeToggle!.click();
+    toggleButton!.click();
     fixture.detectChanges();
 
-    expect(component.isDarkMode).toBe(false);
-    expect(hostElement.classList.contains('dark-theme')).toBe(false);
+    expect(component.mostrarSenha).toBe(false);
+    expect(passwordInput!.type).toBe('password');
+  });
+
+  it('should emit login credentials on submit', async () => {
+    const emitted: unknown[] = [];
+    component.login.subscribe((credentials) => emitted.push(credentials));
+    fixture.detectChanges();
+
+    const hostElement = fixture.nativeElement as HTMLElement;
+    const usernameInput = hostElement.querySelector<HTMLInputElement>('input[name="username"]');
+    const passwordInput = hostElement.querySelector<HTMLInputElement>('input[name="password"]');
+    const form = hostElement.querySelector<HTMLFormElement>('form');
+
+    usernameInput!.value = 'murilo';
+    usernameInput!.dispatchEvent(new Event('input'));
+    passwordInput!.value = '123';
+    passwordInput!.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
+
+    form!.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+
+    expect(emitted).toEqual([{ username: 'murilo', password: '123' }]);
+  });
+
+  it('should emit forgot password when recovery button is clicked', () => {
+    let emitted = false;
+    component.forgotPassword.subscribe(() => (emitted = true));
+    fixture.detectChanges();
+
+    const recoveryButton = (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
+      '.password-recovery',
+    );
+    recoveryButton!.click();
+
+    expect(emitted).toBe(true);
   });
 });

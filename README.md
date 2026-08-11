@@ -50,21 +50,8 @@ Por padrão, o componente usa a imagem do elefante empacotada na lib. Copie-a no
 Para usar outra imagem, coloque o arquivo nos assets do projeto consumidor e informe o caminho no componente:
 
 ```html
-<lib-login-page
-  imageSrc="assets/minha-logo.png"
-  imageAlt="Logo do sistema">
-</lib-login-page>
+<lib-login-page imageSrc="assets/minha-logo.png" imageAlt="Logo do sistema"> </lib-login-page>
 ```
-
-### Font Awesome (ícones de lua/sol do toggle de tema)
-
-Inclua no `index.html` do projeto:
-
-```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-```
-
----
 
 ## Uso
 
@@ -82,7 +69,8 @@ import { LoginPage, LoginCredentials } from '@murilo5341/login-ui';
       imageSrc="assets/minha-logo.png"
       imageAlt="Logo do sistema"
       (login)="entrar($event)"
-      (forgotPassword)="recuperarSenha()">
+      (forgotPassword)="recuperarSenha()"
+    >
     </lib-login-page>
   `,
 })
@@ -101,19 +89,15 @@ export class MinhaTela {
 
 ### API do componente
 
-| Entrada (`@Input`) | Tipo | Padrão | Descrição |
-|---|---|---|---|
-| `imageSrc` | `string` | `assets/Cabelefant.avif` | Caminho da imagem/logo exibida acima do formulário. |
-| `imageAlt` | `string` | `Elephant Art` | Texto alternativo da imagem. |
+| Entrada (`@Input`) | Tipo     | Padrão                   | Descrição                                           |
+| ------------------ | -------- | ------------------------ | --------------------------------------------------- |
+| `imageSrc`         | `string` | `assets/Cabelefant.avif` | Caminho da imagem/logo exibida acima do formulário. |
+| `imageAlt`         | `string` | `Ivory`                  | Texto alternativo da imagem.                        |
 
-| Saída (`@Output`) | Tipo | Quando dispara |
-|---|---|---|
-| `login` | `LoginCredentials` (`{ username, password }`) | Ao enviar o formulário (botão **Entrar**). |
-| `forgotPassword` | `void` | Ao clicar em **"Esqueceu sua senha?"**. |
-
-O toggle de tema (claro/escuro) é interno: adiciona/remove a classe `dark-theme` no `<body>`.
-
----
+| Saída (`@Output`) | Tipo                                          | Quando dispara                             |
+| ----------------- | --------------------------------------------- | ------------------------------------------ |
+| `login`           | `LoginCredentials` (`{ username, password }`) | Ao enviar o formulário (botão **Entrar**). |
+| `forgotPassword`  | `void`                                        | Ao clicar em **"Esqueceu sua senha?"**.    |
 
 ## Publicar uma nova versão (mantenedores)
 

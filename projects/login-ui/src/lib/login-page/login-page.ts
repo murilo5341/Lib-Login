@@ -11,25 +11,19 @@ export interface LoginCredentials {
   standalone: true,
   imports: [FormsModule],
   templateUrl: './login-page.html',
-  styleUrls: ['./login-page.css', './dark-theme.css'],
-  host: {
-    '[class.dark-theme]': 'isDarkMode',
-  },
+  styleUrl: './login-page.css',
 })
 export class LoginPage {
   @Input() imageSrc = 'assets/Cabelefant.avif';
-  @Input() imageAlt = 'Elephant Art';
+  @Input() imageAlt = 'Ivory';
 
   @Output() login = new EventEmitter<LoginCredentials>();
   @Output() forgotPassword = new EventEmitter<void>();
 
   username = '';
   password = '';
-  isDarkMode = false;
-
-  toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-  }
+  mostrarSenha = false;
+  ano = new Date().getFullYear();
 
   onLogin(): void {
     this.login.emit({ username: this.username, password: this.password });

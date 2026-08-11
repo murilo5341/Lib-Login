@@ -1,49 +1,56 @@
-<div class="login-page">    
-  <!-- Moon icon (dark mode toggle) -->
-  <button class="theme-toggle" (click)="toggleTheme()" aria-label="Alternar tema">
-
-    @if (!isDarkMode) {
-    <i class="fa-regular fa-moon"></i>
-    }
-
-    @if (isDarkMode) {
-    <i class="fa-regular fa-sun"></i>
-    }
-
-  </button>
-
-
-
-  <!-- Login card -->
-  <div class="login-card">
-      <!-- Brand image -->
-    <div class="elephant-container">
-      <img [src]="imageSrc" [alt]="imageAlt" class="elephant-image" />
-    </div>
-
-    <!-- Subtitle -->
-    
-    <h1 class="login-title">LOGIN</h1>
-    <!-- <p class="subtitle">"Acesse sua conta para continuar"</p> -->
-    <form class="login-form" (ngSubmit)="onLogin()">
-      <div class="input-group">
-        <input type="text" id="usuario" placeholder="Usuário" [(ngModel)]="username" name="username" required />
+<main class="login-page">
+  <section class="login-mobile">
+    <form class="login-card" (ngSubmit)="onLogin()">
+      <div class="brand-logo">
+        <img [src]="imageSrc" [alt]="imageAlt" />
       </div>
 
-      <div class="input-group">
-        <input type="password" id="senha" placeholder="Senha" [(ngModel)]="password" name="password" required />
+      <div class="hero">
+        <h1>IVORY</h1>
+        <p>Soluções para indústria.</p>
       </div>
 
-      <button type="submit" class="btn-entrar" id="btnEntrar">Entrar</button>
+      <label class="field">
+        <span>Usuário</span>
+        <input
+          type="text"
+          placeholder="Digite seu login"
+          [(ngModel)]="username"
+          name="username"
+          autocomplete="username"
+          required
+        />
+      </label>
+
+      <label class="field">
+        <span>Senha</span>
+        <div class="input-senha">
+          <input
+            [type]="mostrarSenha ? 'text' : 'password'"
+            placeholder="Digite sua senha"
+            [(ngModel)]="password"
+            name="password"
+            autocomplete="current-password"
+            required
+          />
+          <button
+            type="button"
+            class="toggle-senha"
+            (click)="mostrarSenha = !mostrarSenha"
+            aria-label="Alternar visibilidade da senha"
+          >
+            {{ mostrarSenha ? 'Ocultar' : 'Mostrar' }}
+          </button>
+        </div>
+      </label>
+
+      <button class="btn-login" type="submit">Entrar</button>
+
+      <button class="password-recovery" type="button" (click)="forgotPassword.emit()">
+        Esqueceu sua senha?
+      </button>
+
+      <p class="rodape">Tintas Marfim &copy; {{ ano }}</p>
     </form>
-    
-    <p class="password-recovery" (click)="forgotPassword.emit()">Esqueceu sua senha?</p>
-    <!-- <div class="linha"></div> -->
-     <p class="direitos-autorais">@Todos os direitos reservados a Tintas Marfim</p>
-  </div>
-
-  <!-- Fluid decoration bottom-left -->
-  <!-- <div class="fluid-decoration">
-    <img src="padraotm2.svg" alt="" class="fluid-image" />
-  </div> -->
-</div>
+  </section>
+</main>
